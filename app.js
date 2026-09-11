@@ -20,7 +20,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
-// OrbitControls (NEU!)
+// OrbitControls (NEU – direkt aus window)
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
