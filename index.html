@@ -17,8 +17,15 @@
 
 <div id="canvas-container"></div>
 
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<script src="https://unpkg.com/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+<!-- Three.js + OrbitControls als ES-Module -->
+<script type="module">
+  import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+  import { OrbitControls } from "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+  window.THREE = THREE;
+  window.OrbitControls = OrbitControls;
+</script>
+
 <script src="app.js"></script>
 
 </body>
