@@ -12,7 +12,7 @@ const container = document.getElementById("canvas-container");
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x222222);
 
-const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 5000);
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 5000);
 camera.position.set(0, 200, 350);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -20,11 +20,12 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+// OrbitControls (NEU!)
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
 // Licht
-scene.add(new THREE.DirectionalLight(0xffffff, 1).position.set(100,200,100));
+scene.add(new THREE.DirectionalLight(0xffffff, 1).position.set(100, 200, 100));
 scene.add(new THREE.AmbientLight(0x404040));
 
 // Terrain-Parameter
@@ -85,7 +86,7 @@ function lon2tile(lon, zoom) {
 
 function lat2tile(lat, zoom) {
   return Math.floor(
-    (1 - Math.log(Math.tan(lat * Math.PI/180) + 1 / Math.cos(lat * Math.PI/180)) / Math.PI) / 2 * Math.pow(2, zoom)
+    (1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom)
     * Math.pow(2, zoom)
   );
 }
@@ -141,7 +142,7 @@ function sampleDEM(lat, lon, dem) {
   const imgH = tile.tile.height;
 
   const xFloat = (lon + 180) / 360 * Math.pow(2, zoom);
-  const yFloat = (1 - Math.log(Math.tan(lat * Math.PI/180) + 1 / Math.cos(lat * Math.PI/180)) / Math.PI) / 2 * Math.pow(2, zoom);
+  const yFloat = (1 - Math.log(Math.tan(lat * Math.PI / 180) + 1 / Math.cos(lat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom);
 
   const xNorm = xFloat - xtile;
   const yNorm = yFloat - ytile;
@@ -153,7 +154,7 @@ function sampleDEM(lat, lon, dem) {
   return tile.tile.heights[idx];
 }
 
-// ---------- GPX Parser & Projektion ----------
+// ---------- GPX Parser ----------
 
 function parseGPX(xmlText) {
   log("Starte XML-Parsing…");
@@ -217,7 +218,7 @@ async function createTerrainFromDEM(points) {
     terrainResolution,
     terrainResolution
   );
-  geo.rotateX(-Math.PI/2);
+  geo.rotateX(-Math.PI / 2);
 
   const pos = geo.attributes.position;
 
@@ -233,7 +234,7 @@ async function createTerrainFromDEM(points) {
 
     const h = sampleDEM(lat, lon, dem);
 
-    pos.setY(i, h / 10); // Skalierung
+    pos.setY(i, h / 10);
   }
 
   geo.computeVertexNormals();
@@ -293,7 +294,7 @@ function projectTrackToTerrain(points, bounds, dem) {
 
 // ---------- Datei laden ----------
 
-document.getElementById('gpxFile').addEventListener('change', async e => {
+document.getElementById("gpxFile").addEventListener("change", async e => {
   const file = e.target.files[0];
   if (!file) {
     log("❌ Keine Datei ausgewählt.");
@@ -336,8 +337,8 @@ function animate() {
 }
 animate();
 
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth/window.innerHeight;
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
