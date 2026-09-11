@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>GPX → 3D Terrain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="ui">
+  <b>GPX → 3D Terrain</b><br><br>
+  <input type="file" id="gpxFile" accept=".gpx" /><br>
+  <div id="log"></div>
+</div>
+
+<div id="canvas-container"></div>
+
+<script type="module">
+  import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+  import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
+  window.THREE = THREE;
+  window.OrbitControls = OrbitControls;
+
+  const script = document.createElement("script");
+  script.src = "app.js?v=" + Date.now();
+  document.body.appendChild(script);
+</script>
+
+</body>
+</html>
