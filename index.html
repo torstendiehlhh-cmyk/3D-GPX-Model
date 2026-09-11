@@ -19,15 +19,18 @@
 
 <!-- Three.js + OrbitControls als ES-Module -->
 <script type="module">
-  import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-  import { OrbitControls } from "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+  import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js";
+  import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
 
   // Globale Variablen für app.js verfügbar machen
   window.THREE = THREE;
   window.OrbitControls = OrbitControls;
-</script>
 
-<script src="app.js"></script>
+  // Jetzt erst app.js laden – garantiert nach THREE
+  const script = document.createElement("script");
+  script.src = "app.js?v=" + Date.now(); // Cache umgehen
+  document.body.appendChild(script);
+</script>
 
 </body>
 </html>
