@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>GPX → 3D Terrain</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="ui">
+  <b>GPX → 3D Terrain</b><br><br>
+  <input type="file" id="gpxFile" accept=".gpx" /><br>
+  <div id="log"></div>
+</div>
+
+<div id="canvas-container"></div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.160.0/examples/js/controls/OrbitControls.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
